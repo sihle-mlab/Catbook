@@ -1,0 +1,26 @@
+<ion-header>
+  <ion-navbar color="primary">
+    <ion-title *ngIf="shoppingItem != null">{{shoppingItem.name}}</ion-title>
+    <ion-title *ngIf="shoppingItem == null">Add Item</ion-title>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content>
+<form [formGroup]="form">
+  <ion-item>
+    <ion-label floating>Name</ion-label>
+    <ion-input type="text" formControlName="name"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label floating>Price</ion-label>
+    <ion-input type="number"  formControlName="price"></ion-input>
+  </ion-item>
+
+<div padding>
+  <button ion-button (click)="addNewShoppingBagItem()" color="secondary" block>Save Shopping Item</button>
+</div>
+</form>
+
+</ion-content>

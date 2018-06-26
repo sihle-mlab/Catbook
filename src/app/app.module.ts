@@ -4,27 +4,46 @@ import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 
+import { AngularFireModule } from 'angularfire2';
+import { AngularFireDatabaseModule, AngularFireDatabase } from 'angularfire2/database';
+
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
+import { catService } from '../services/cat-service';
+import { HttpModule } from '@angular/http';
+import { environment } from '../environments/environments';
+
+
+
 
 @NgModule({
   declarations: [
-    MyApp,
-    HomePage
+    MyApp
   ],
   imports: [
     BrowserModule,
-    IonicModule.forRoot(MyApp)
+    HttpModule,
+    IonicModule.forRoot(MyApp),
+
+    //Initialize firebase for the entire app
+    AngularFireModule.initializeApp(environment.firebase),
+
+    //ANgularFire Database Module
+    AngularFireDatabaseModule
+
   ],
   bootstrap: [IonicApp],
   entryComponents: [
-    MyApp,
-    HomePage
+    MyApp
   ],
   providers: [
+    //The rest
     StatusBar,
     SplashScreen,
-    {provide: ErrorHandler, useClass: IonicErrorHandler}
+    //ANgularFire Database Module
+    AngularFireDatabase,
+    {provide: ErrorHandler, useClass: IonicErrorHandler},
+    catService
   ]
 })
 export class AppModule {}
